@@ -229,7 +229,7 @@ const CropTransformer = () => {
         y={isFlippedY ? shownImageDimensions.height : 0}
         width={shownImageDimensions.width}
         height={shownImageDimensions.height}
-        filters={[Konva.Filters.Blur, Konva.Filters.Brighten]}
+        // filters={[Konva.Filters.Blur, Konva.Filters.Brighten]}
         blurRadius={10}
         brightness={-0.3}
         scaleX={isFlippedX ? -1 : 1}
