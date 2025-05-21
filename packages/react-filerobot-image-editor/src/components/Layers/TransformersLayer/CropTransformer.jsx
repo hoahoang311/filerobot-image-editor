@@ -1,7 +1,9 @@
 /** External Dependencies */
 import React, { useEffect, useRef, useMemo } from 'react';
-import { Ellipse, Image, Rect, Transformer } from 'react-konva';
+import { Ellipse, Image, Line, Rect, Transformer } from 'react-konva';
 import Konva from 'konva';
+import * as faceapi from 'face-api.js';
+import PropTypes from 'prop-types';
 
 /** Internal Dependencies */
 import { useStore } from 'hooks';
@@ -21,7 +23,7 @@ const noEffectTextDimensions = {
   height: 100,
 };
 
-const CropTransformer = () => {
+const CropTransformer = ({ setFaceBox, faceBox, setTopToChin }) => {
   const {
     dispatch,
     theme,
@@ -116,7 +118,7 @@ const CropTransformer = () => {
         attrs,
         { ...imageDimensions, abstractX: 0, abstractY: 0 },
         isCustom || isEllipse ? false : getProperCropRatio(),
-        { ...cropSettings, ...restrictions }
+        { ...cropSettings, ...restrictions },
       ),
       true,
     );
@@ -151,6 +153,97 @@ const CropTransformer = () => {
       }
     }
   }, [cropRatio, shownImageDimensions, cropSettings]);
+
+  const scaledMeasures = useMemo(() => {
+    const { width: shownWidth, height: shownHeight } = shownImageDimensions;
+    const { width, height } = originalImage;
+
+    return {
+      scaleX: shownWidth / width,
+      scaleY: shownHeight / height,
+    };
+  });
+
+  useEffect(() => {
+    // Load models from public folder
+    if (!faceBox || faceBox.src !== originalImage.src) {
+      const loadModels = async () => {
+        const MODEL_URL =
+          'https://supachaic.github.io/react-face-recognition/models';
+        await faceapi.loadTinyFaceDetectorModel(MODEL_URL);
+        await faceapi.loadFaceLandmarkTinyModel(MODEL_URL);
+        await faceapi.loadFaceRecognitionModel(MODEL_URL);
+      };
+
+      const detectFace = async () => {
+        const detection = await faceapi.detectSingleFace(
+          originalImage,
+          new faceapi.TinyFaceDetectorOptions(),
+        );
+
+        if (detection) {
+          const { box } = detection;
+          const { x, y, width, height } = box;
+
+          const scaledBox = {
+            x: x * scaledMeasures.scaleX,
+            y: y * scaledMeasures.scaleY,
+            width: width * scaledMeasures.scaleX,
+            height: height * scaledMeasures.scaleY,
+            src: originalImage.src,
+          };
+
+          setFaceBox(scaledBox); // Assuming you have a setFaceBox state hook
+        }
+      };
+
+      loadModels().then(detectFace);
+    }
+  }, [originalImage, scaledMeasures]);
+
+  useEffect(() => {
+    if (
+      !originalImage ||
+      !originalImage.complete ||
+      originalImage.naturalWidth === 0 ||
+      !faceBox
+    ) {
+      return;
+    }
+
+    // Process the image on offscreen canvas
+    const offCanvas = document.createElement('canvas');
+    offCanvas.width = originalImage.width;
+    offCanvas.height = originalImage.height;
+
+    const ctx = offCanvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.drawImage(originalImage, 0, 0);
+    const imageData = ctx.getImageData(
+      0,
+      0,
+      originalImage.width,
+      originalImage.height,
+    );
+    const { data } = imageData;
+
+    for (let y = 0; y < originalImage.height; y += 1) {
+      for (let x = 0; x < originalImage.width; x += 1) {
+        const idx = (y * originalImage.width + x) * 4;
+        const r = data[idx];
+        const g = data[idx + 1];
+        const b = data[idx + 2];
+
+        const isWhite = r > 200 && g > 200 && b > 200;
+
+        if (!isWhite && y > 5 && x > 5 && x < originalImage.width - 5) {
+          setTopToChin(faceBox.height + faceBox.y - y * scaledMeasures.scaleY);
+          return;
+        }
+      }
+    }
+  }, [originalImage, scaledMeasures, faceBox]);
 
   if (!designLayer) {
     return null;
@@ -229,7 +322,7 @@ const CropTransformer = () => {
         y={isFlippedY ? shownImageDimensions.height : 0}
         width={shownImageDimensions.width}
         height={shownImageDimensions.height}
-        // filters={[Konva.Filters.Blur, Konva.Filters.Brighten]}
+        filters={[Konva.Filters.Blur, Konva.Filters.Brighten]}
         blurRadius={10}
         brightness={-0.3}
         scaleX={isFlippedX ? -1 : 1}
@@ -247,11 +340,35 @@ const CropTransformer = () => {
           }}
         />
       ) : (
-        <Rect
-          {...cropShapeProps}
-          width={crop.noEffect ? 0 : width}
-          height={crop.noEffect ? 0 : height}
-        />
+        <>
+          <Rect
+            {...cropShapeProps}
+            width={crop.noEffect ? 0 : width}
+            height={crop.noEffect ? 0 : height}
+          />
+          {cropSettings.showImageFrames && (
+            <Line
+              points={[
+                cropShapeProps.x + width / 2,
+                cropShapeProps.y,
+                cropShapeProps.x + width / 2,
+                cropShapeProps.y + height,
+              ]}
+              stroke="red"
+              strokeWidth={1}
+            />
+          )}
+          {cropSettings.showImageFrames && faceBox && (
+            <Rect
+              x={faceBox.x}
+              y={faceBox.y}
+              width={faceBox.width}
+              height={faceBox.height}
+              stroke="red"
+              strokeWidth={1}
+            />
+          )}
+        </>
       )}
       {crop.noEffect && (
         <TextNode
@@ -303,6 +420,22 @@ const CropTransformer = () => {
       />
     </>
   );
+};
+
+CropTransformer.propTypes = {
+  setFaceBox: PropTypes.func.isRequired,
+  faceBox: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
+    src: PropTypes.string,
+  }),
+  setTopToChin: PropTypes.func.isRequired,
+};
+
+CropTransformer.defaultProps = {
+  faceBox: null,
 };
 
 export default CropTransformer;

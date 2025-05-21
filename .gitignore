@@ -8,6 +8,7 @@ package-lock.json
 .eslintCache
 .vscode
 .idea
+.yarn
 
 # production
 dist

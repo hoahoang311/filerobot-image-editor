@@ -47,6 +47,7 @@ const StyledCanvasAndTools = styled.div`
   flex-grow: 1;
   overflow-y: auto;
   display: flex;
+  position: relative;
   flex-direction: column;
 
   ${({ showTabsDrawer }) =>
@@ -85,10 +86,19 @@ const StyledDrawer = styled(Drawer)`
   }
 `;
 
+const StyledInfo = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  font-size: 12px;
+`;
+
 export {
   StyledAppWrapper,
   StyledMainContent,
   StyledCanvasAndTools,
   StyledTabs,
   StyledDrawer,
+  StyledInfo,
 };

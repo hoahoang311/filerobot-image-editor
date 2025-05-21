@@ -37,6 +37,7 @@ import {
   StyledMainContent,
   StyledTabs,
   StyledCanvasAndTools,
+  StyledInfo,
 } from './App.styled';
 
 const App = () => {
@@ -67,6 +68,7 @@ const App = () => {
     updateStateFnRef,
     noCrossOrigin,
     resetOnImageSourceChange,
+    Crop: cropConfig,
   } = config;
 
   const showTabsDrawer = window.matchMedia('(max-width: 760px)').matches;
@@ -84,6 +86,8 @@ const App = () => {
   // as it won't be possible to have the latest value of the state variable in js event handler.
   const haveNotSavedChangesRef = useRef(haveNotSavedChanges);
   const transformImgFn = useTransformedImgData();
+  const [faceBox, setFaceBox] = useState(null);
+  const [topToChin, setTopToChin] = useState(0);
 
   const setNewOriginalImage = useCallback((newOriginalImage) => {
     dispatch({
@@ -335,7 +339,25 @@ const App = () => {
             className="FIE_editor-content"
             showTabsDrawer={showTabsDrawer}
           >
-            <MainCanvas />
+            {faceBox && cropConfig.showImageFrames && (
+              <StyledInfo>
+                <p>
+                  {`Face height: ${Math.floor(
+                    faceBox.height * 0.2645833333,
+                  )}mm`}
+                </p>
+                {topToChin && (
+                  <p>
+                    {`Top to chin: ${Math.floor(topToChin * 0.2645833333)}mm`}
+                  </p>
+                )}
+              </StyledInfo>
+            )}
+            <MainCanvas
+              setFaceBox={setFaceBox}
+              faceBox={faceBox}
+              setTopToChin={setTopToChin}
+            />
             {!showCanvasOnly && <ToolsBar isPhoneScreen={isPhoneScreen} />}
           </StyledCanvasAndTools>
         </StyledMainContent>

@@ -31,7 +31,7 @@ const AssemblyPoint = (props) => {
 
   useEffect(() => {
     assignFinetuneNamesToKonva();
-  }, [])
+  }, []);
 
   const defaultAndProvidedConfigMerged = deepMerge(defaultConfig, props);
 

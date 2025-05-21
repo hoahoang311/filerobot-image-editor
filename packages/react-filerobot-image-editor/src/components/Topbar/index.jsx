@@ -30,6 +30,15 @@ const Topbar = ({ toggleMainMenu }) => {
 
   return (
     <StyledTopbar className="FIE_topbar" isPhoneScreen={isPhoneScreen}>
+      <StyledControlButtonsWrapper>
+        <StyledHistoryButtons className="FIE_topbar-history-buttons">
+          <ResetButton margin="0" showBackButton={showBackButton} />
+          <UndoButton margin="0" showBackButton={showBackButton} />
+          <RedoButton margin="0" showBackButton={showBackButton} />
+        </StyledHistoryButtons>
+
+        {showBackButton ? <SaveButton /> : <CloseButton />}
+      </StyledControlButtonsWrapper>
       <StyledMainButtonsWrapper className="FIE_topbar-buttons-wrapper">
         <StyledMenuIconButton
           className="FIE_tabs_toggle_btn"
@@ -51,16 +60,6 @@ const Topbar = ({ toggleMainMenu }) => {
           isPhoneScreen={isPhoneScreen}
         />
       </StyledFlexCenterAlignedContainer>
-
-      <StyledControlButtonsWrapper>
-        <StyledHistoryButtons className="FIE_topbar-history-buttons">
-          <ResetButton margin="0" showBackButton={showBackButton} />
-          <UndoButton margin="0" showBackButton={showBackButton} />
-          <RedoButton margin="0" showBackButton={showBackButton} />
-        </StyledHistoryButtons>
-
-        {showBackButton ? <SaveButton /> : <CloseButton />}
-      </StyledControlButtonsWrapper>
     </StyledTopbar>
   );
 };

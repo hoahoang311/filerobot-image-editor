@@ -17,8 +17,6 @@ const StyledTopbar = styled.div`
   gap: 16px;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid
-    ${({ theme: { palette } }) => palette[PC.BordersSecondary]};
 
   [data-phone='true'] & {
     padding: 6px 6px 4px 6px;

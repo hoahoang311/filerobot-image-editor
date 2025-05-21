@@ -10,7 +10,7 @@ import { StyledSpinnerWrapper, StyledSpinner } from './Spinner.styled';
 const Spinner = ({ theme }) => {
   return (
     <StyledSpinnerWrapper className="FIE_spinner-wrapper">
-      <StyledSpinner size={50} color={theme.palette[PC.AccentStateless]} />
+      <StyledSpinner size={50} color="#186DE2" />
     </StyledSpinnerWrapper>
   );
 };

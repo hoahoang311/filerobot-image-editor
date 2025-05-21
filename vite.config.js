@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => {
         moduleDirectories: [
           './packages/react-filerobot-image-editor/src',
           'node_modules',
-        ]
+        ],
       }),
       react(
         isProduction
@@ -73,7 +73,7 @@ export default defineConfig(({ mode }) => {
               },
             },
             outDir: './dist',
-            sourcemap: 'hidden',
+            sourcemap: true,
           }),
     },
   };
