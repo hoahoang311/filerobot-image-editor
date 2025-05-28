@@ -4,7 +4,11 @@ import { MIN_CROP, TABS_IDS, TOOLS_IDS } from 'utils/constants';
 export default {
   theme: {
     palette: {
+      'bg-primary': '#186DE2',
       'bg-primary-active': '#ECF3FF',
+      'txt-primary': '#4D4D4D',
+      'txt-disabled': 'rgba(77,77,77,0.5)',
+      'accent-primary-active': '#186DE2',
     },
     typography: {
       fontFamily: 'Roboto, Arial',
@@ -89,7 +93,7 @@ export default {
   },
   [TOOLS_IDS.ROTATE]: {
     angle: 60,
-    componentType: 'slider', // slider | buttons
+    componentType: 'buttons', // slider | buttons
   },
   tabsIds: [],
   defaultTabId: TABS_IDS.ADJUST,

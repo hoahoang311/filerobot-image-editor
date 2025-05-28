@@ -1,12 +1,13 @@
 /** External Dependencies */
-import {
-  FineTune,
-  Annotate,
-  CropFrame,
-  ImageFilters,
-  Watermark,
-  Resize,
-} from '@scaleflex/icons';
+// import {
+//   FineTune,
+//   Annotate,
+//   CropFrame,
+//   ImageFilters,
+//   Watermark,
+//   Resize,
+// } from '@scaleflex/icons';
+import { TabIconDefault } from 'components/Icons';
 
 /** Internal Dependencies */
 import { TABS_IDS } from 'utils/constants';
@@ -15,33 +16,33 @@ export const AVAILABLE_TABS = [
   {
     id: TABS_IDS.ADJUST,
     labelKey: 'adjustTab',
-    icon: CropFrame,
+    icon: TabIconDefault,
   },
   {
     id: TABS_IDS.FINETUNE,
     labelKey: 'finetuneTab',
-    icon: FineTune,
+    icon: TabIconDefault,
   },
   {
     id: TABS_IDS.FILTERS,
     labelKey: 'filtersTab',
-    icon: ImageFilters,
+    icon: TabIconDefault,
     hideFn: ({ useCloudimage }) => useCloudimage,
   },
   {
     id: TABS_IDS.WATERMARK,
     labelKey: 'watermarkTab',
-    icon: Watermark,
+    icon: TabIconDefault,
   },
   {
     id: TABS_IDS.ANNOTATE,
     labelKey: 'annotateTabLabel',
-    icon: Annotate,
+    icon: TabIconDefault,
     hideFn: ({ useCloudimage }) => useCloudimage,
   },
   {
     id: TABS_IDS.RESIZE,
     labelKey: 'resizeTab',
-    icon: Resize,
+    icon: TabIconDefault,
   },
 ];

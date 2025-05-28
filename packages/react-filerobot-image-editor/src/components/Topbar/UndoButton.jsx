@@ -1,7 +1,7 @@
 /** External Dependencies */
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import Undo from '@scaleflex/icons/undo';
+import { UndoIcon } from 'components/Icons';
 
 /** Internal Dependencies */
 import { UNDO } from 'actions';
@@ -25,7 +25,8 @@ const UndoButton = ({ margin }) => {
       title={t('undoTitle')}
       margin={margin}
     >
-      <Undo />
+      <UndoIcon />
+      Undo
     </StyledHistoryButton>
   );
 };

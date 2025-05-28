@@ -3,9 +3,9 @@ import React from 'react';
 
 /** Internal Dependencies */
 import { useFilter, useStore } from 'hooks';
-import Carousel from 'components/common/Carousel';
 import FilterItem from './FilterItem';
 import { AVAILABLE_FILTERS } from './Filters.constants';
+import { StyledFilterContainer } from './Filters.styled';
 
 const style = { maxWidth: '100%', width: '100%' };
 
@@ -14,7 +14,7 @@ const Filters = () => {
   const [appliedFilter, applyFilter] = useFilter();
 
   return (
-    <Carousel className="FIE_filters" style={style}>
+    <StyledFilterContainer className="FIE_filters" style={style}>
       {AVAILABLE_FILTERS.map((filter) => (
         <FilterItem
           key={filter.label}
@@ -25,7 +25,7 @@ const Filters = () => {
           image={originalImage}
         />
       ))}
-    </Carousel>
+    </StyledFilterContainer>
   );
 };
 export default Filters;

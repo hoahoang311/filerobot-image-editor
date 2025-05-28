@@ -19,7 +19,7 @@ const DEFAULT_VALUE = {
   contrast: 0,
 };
 const MAX_VALUE = 100;
-const sliderStyle = { width: 150, padding: 0, margin: 0 };
+const sliderStyle = { width: '100%', padding: 0, margin: 0 };
 
 const ContrastOptions = ({ t }) => {
   const [finetuneProps, setFinetuneProps] = useFinetune(
@@ -43,7 +43,6 @@ const ContrastOptions = ({ t }) => {
           className="FIE_contrast-option"
           min={MIN_VALUE}
           max={MAX_VALUE}
-          width="124px"
           value={finetuneProps.contrast ?? DEFAULT_VALUE.contrast}
           onChange={changeValue}
           style={sliderStyle}

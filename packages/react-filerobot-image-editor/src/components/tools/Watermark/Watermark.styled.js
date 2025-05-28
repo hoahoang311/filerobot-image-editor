@@ -6,14 +6,20 @@ const StyledWatermarkWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 16px;
   overflow: hidden;
 
-  ${({ noWrap }) => (noWrap ? 'flex-wrap: nowrap;' : '')};
+  // ${({ noWrap }) => (noWrap ? 'flex-wrap: nowrap;' : '')};
 `;
 
 const StyledControlsWrapper = styled.div`
   margin-bottom: 8px;
+`;
+
+const StyledWatermarkList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
 `;
 
 const StyledWatermarkGalleryItem = styled.div(
@@ -47,4 +53,5 @@ export {
   StyledWatermarkWrapper,
   StyledControlsWrapper,
   StyledWatermarkGalleryItem,
+  StyledWatermarkList,
 };

@@ -5,9 +5,9 @@ import { FontVariant as FV } from '@scaleflex/ui/utils/types/typography';
 
 const StyledHSVOptions = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-between;
-  gap: 10px;
 
   .SfxSlider-root {
     min-width: 100px;
@@ -27,6 +27,11 @@ const StyledHSVOptions = styled.div`
 const StyledSliderContainer = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: white;
+  margin-top: 8px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
 `;
 
 const StyledSliderLabel = styled(Label)`

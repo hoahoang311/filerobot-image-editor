@@ -115,6 +115,8 @@ const AnnotationOptions = ({
       className={`FIE_annotations-options${className ? ` ${className}` : ''}`}
       isPhoneScreen={isPhoneScreen}
     >
+      {children}
+
       {!hideFillOption && (
         <ColorInput
           color={annotation.fill}
@@ -122,8 +124,6 @@ const AnnotationOptions = ({
           colorFor="fill"
         />
       )}
-
-      {children}
 
       <StyledOptionsWrapper>
         {options.map(

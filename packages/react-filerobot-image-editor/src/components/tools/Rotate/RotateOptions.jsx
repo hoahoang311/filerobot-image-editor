@@ -15,6 +15,7 @@ import {
   StyledRotationOptions,
   StyledRotationSlider,
   StyledRotateButton,
+  StyledRotateButtonContainer,
 } from './Rotate.styled';
 
 const RotateOptions = () => {
@@ -64,7 +65,7 @@ const RotateOptions = () => {
 
   if (rotateConfig.componentType === 'buttons') {
     return (
-      <>
+      <StyledRotateButtonContainer>
         <ToolsBarItemButton
           className="FIE_rotate_button_left"
           id={TOOLS_IDS.IMAGE}
@@ -79,7 +80,7 @@ const RotateOptions = () => {
           Icon={RotationRight}
           onClick={changeRotationButtonPositive}
         />
-      </>
+      </StyledRotateButtonContainer>
     );
   }
 

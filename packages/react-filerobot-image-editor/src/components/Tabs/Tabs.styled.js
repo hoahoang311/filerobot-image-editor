@@ -6,16 +6,16 @@ import { FontVariant as FV } from '@scaleflex/ui/utils/types/typography';
 
 const StyledTabItem = styled.div(
   ({ theme }) => `
-    width: 72px;
-    min-height: 66px;
-    padding: 4px 2px;
-    border-radius: 4px;
+    width: 64px;
+    min-height: 42px;
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 2px;
     background: ${theme.palette[PC.BackgroundStateless]};
     align-items: center;
     justify-content: center;
+      box-shadow: 6px 8px 12px 0px rgba(146, 166, 188, 0.14);
 
     [data-phone='true'] & {
       margin-bottom: 0;
@@ -50,7 +50,7 @@ const StyledTabItemLabel = styled(Label)(
   ({ theme }) => `
   color: ${theme.palette[PC.TextPrimary]};
   ${theme.typography.font[FV.LabelSmall]};
-  font-size: 12px;
+  font-size: 10px;
   line-height: 14px;
 
   span {

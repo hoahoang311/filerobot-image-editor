@@ -7,10 +7,12 @@ const StyledOptions = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
-  margin-top: 4px;
+  padding: 16px;
+  margin-top: 8px;
+  border-radius: 8px;
   gap: 8px;
   flex-wrap: wrap;
+  background-color: white;
 
   ${({ isPhoneScreen }) =>
     isPhoneScreen &&

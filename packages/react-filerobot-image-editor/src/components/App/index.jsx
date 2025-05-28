@@ -32,6 +32,7 @@ import filterStrToClass from 'utils/filterStrToClass';
 import isSameImage from 'utils/isSameImage';
 import useUpdateEffect from 'hooks/useUpdateEffect';
 import TabsDrawer from 'components/TabsDrawer';
+import { StyledToolsWrapper } from 'components/tools/Text/TextOptions/TextOptions.styled';
 import {
   StyledAppWrapper,
   StyledMainContent,
@@ -330,11 +331,6 @@ const App = () => {
       )}
       {originalImage && feedback.duration !== 0 && (
         <StyledMainContent className="FIE_main-container">
-          {!showCanvasOnly && !showTabsDrawer && (
-            <StyledTabs className="FIE_tabs">
-              <Tabs toggleMainMenu={toggleMainMenu} />
-            </StyledTabs>
-          )}
           <StyledCanvasAndTools
             className="FIE_editor-content"
             showTabsDrawer={showTabsDrawer}
@@ -358,7 +354,14 @@ const App = () => {
               faceBox={faceBox}
               setTopToChin={setTopToChin}
             />
-            {!showCanvasOnly && <ToolsBar isPhoneScreen={isPhoneScreen} />}
+            <StyledToolsWrapper className="FIE_tool_wrapper">
+              {!showCanvasOnly && <ToolsBar isPhoneScreen={isPhoneScreen} />}
+              {!showCanvasOnly && !showTabsDrawer && (
+                <StyledTabs className="FIE_tabs">
+                  <Tabs toggleMainMenu={toggleMainMenu} />
+                </StyledTabs>
+              )}
+            </StyledToolsWrapper>
           </StyledCanvasAndTools>
         </StyledMainContent>
       )}

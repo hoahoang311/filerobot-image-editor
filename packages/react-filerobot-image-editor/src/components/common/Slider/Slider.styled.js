@@ -4,15 +4,18 @@ import Slider from '@scaleflex/ui/core/slider';
 import { Color as PC } from '@scaleflex/ui/utils/types/palette';
 
 const StyledSlider = styled(Slider)`
-  width: ${({ width }) => width || '104px'};
-  max-width: ${({ width }) => width || '104px'};
+  width: ${({ width }) => width || '100%'};
+  max-width: ${({ width }) => width || '100%'};
   user-select: none;
   padding: 0;
   margin-bottom: ${({ noMargin }) => (noMargin ? '' : '16px')};
 
   .SfxSlider-thumb {
-    background-color: ${({ theme: { palette } }) =>
-      palette[PC.AccentStateless]};
+    background-color: white;
+    width: 15px;
+    height: 15px;
+    border: 4px solid
+      ${({ theme: { palette } }) => palette[PC.BackgroundPrimary]};
   }
 
   .SfxSlider-Track {
@@ -22,7 +25,8 @@ const StyledSlider = styled(Slider)`
 
   .SfxSlider-rail {
     height: 2px;
-    background-color: ${({ theme: { palette } }) => palette[PC.BordersItem]};
+    background-color: ${({ theme: { palette } }) =>
+      palette[PC.BackgroundPrimary]};
   }
 `;
 

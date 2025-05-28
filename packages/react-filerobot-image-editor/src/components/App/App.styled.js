@@ -15,7 +15,6 @@ const StyledAppWrapper = styled.div.attrs(({ $size = {} }) => ({
   max-height: 100%;
   width: 100%;
   max-width: 100%;
-  overflow: auto;
   border-radius: 8px;
   position: relative;
   min-height: 250px;
@@ -45,10 +44,19 @@ const StyledCanvasAndTools = styled.div`
   height: 100%;
   width: calc(100% - 80px); // 80px = tabsbar's width.
   flex-grow: 1;
-  overflow-y: auto;
   display: flex;
   position: relative;
-  flex-direction: column;
+  background-color: #f5f5f5;
+  ${({ showTabsDrawer }) =>
+    showTabsDrawer &&
+    `
+     overflow-y: unset;
+  `}
+`;
+
+const StyledToolWrapper = styled.div`
+  height: 100%;
+  width: calc(100% - 80px); // 80px = tabsbar's width.
 
   ${({ showTabsDrawer }) =>
     showTabsDrawer &&
@@ -58,15 +66,15 @@ const StyledCanvasAndTools = styled.div`
 `;
 
 const StyledTabs = styled.div`
-  min-width: 108px;
   height: 100%;
-  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  padding-top: 16px;
+  padding-right: 16px;
+  padding-left: 8px;
+  gap: 4px;
   overflow-y: auto;
   max-height: 100%;
-  box-shadow: 6px 8px 12px 0px rgba(146, 166, 188, 0.14);
 
   [data-phone='true'] & {
     display: flex;

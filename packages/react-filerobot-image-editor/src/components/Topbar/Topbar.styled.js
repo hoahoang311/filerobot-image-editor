@@ -33,19 +33,20 @@ const StyledTopbar = styled.div`
 const StyledMainButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
-  order: 1;
 `;
 
 const StyledControlButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
-  order: 3;
   gap: 4px;
 `;
 
 const StyledHistoryButton = styled(IconButton)`
   margin: ${({ margin }) => margin ?? '0 4px'};
-
+  display: flex;
+  gap: 8px;
+  color: ${({ theme: { palette }, disabled }) =>
+    !disabled ? palette[PC.TextPrimary] : palette[PC.TextDisabled]} !important;
   svg {
     color: ${({ theme: { palette }, disabled }) =>
       !disabled ? palette[PC.IconsPrimary] : palette[PC.IconsMuted]};

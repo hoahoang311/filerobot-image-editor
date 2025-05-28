@@ -19,7 +19,7 @@ const DEFAULT_VALUE = {
   blurRadius: MIN_VALUE,
 };
 const MAX_VALUE = 100;
-const sliderStyle = { width: 150, padding: 0, margin: 0 };
+const sliderStyle = { width: '100%', padding: 0, margin: 0 };
 
 const BlurOptions = ({ t }) => {
   const [finetuneProps, setFinetuneProps] = useFinetune(
@@ -43,7 +43,6 @@ const BlurOptions = ({ t }) => {
           className="FIE_blur-option"
           min={MIN_VALUE}
           max={MAX_VALUE}
-          width="124px"
           value={finetuneProps.blurRadius ?? DEFAULT_VALUE.blurRadius}
           onChange={changeValue}
           style={sliderStyle}

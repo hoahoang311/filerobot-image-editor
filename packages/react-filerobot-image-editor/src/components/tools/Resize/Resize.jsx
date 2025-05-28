@@ -164,11 +164,25 @@ const Resize = ({ onChange, currentSize, hideResetButton, alignment }) => {
         onChange={isManualChangeDisabled ? undefined : changeResize}
         inputMode="numeric"
         title={t('resizeWidthTitle')}
-        label={t('width')}
+        label="W"
         inputProps={{ type: 'number' }}
         size="sm"
         iconEnd="px"
         placeholder="Width"
+        disabled={isManualChangeDisabled}
+      />
+      <StyledResizeInput
+        className="FIE_resize-height-option"
+        value={isEmptyEditedHeight ? '' : dimensions.height}
+        name="height"
+        onChange={isManualChangeDisabled ? undefined : changeResize}
+        inputMode="numeric"
+        title={t('resizeHeightTitle')}
+        label="H"
+        inputProps={{ type: 'number' }}
+        size="sm"
+        iconEnd="px"
+        placeholder="Height"
         disabled={isManualChangeDisabled}
       />
       <StyledRatioLockIcon
@@ -185,20 +199,6 @@ const Resize = ({ onChange, currentSize, hideResetButton, alignment }) => {
           <LockOutline size={16} color={theme.palette.error} />
         )}
       </StyledRatioLockIcon>
-      <StyledResizeInput
-        className="FIE_resize-height-option"
-        value={isEmptyEditedHeight ? '' : dimensions.height}
-        name="height"
-        onChange={isManualChangeDisabled ? undefined : changeResize}
-        inputMode="numeric"
-        title={t('resizeHeightTitle')}
-        label={t('height')}
-        inputProps={{ type: 'number' }}
-        size="sm"
-        iconEnd="px"
-        placeholder="Height"
-        disabled={isManualChangeDisabled}
-      />
       {!hideResetButton && (
         <StyledResetButton
           className="FIE_resize-reset-button"

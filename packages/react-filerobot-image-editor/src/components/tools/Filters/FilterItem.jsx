@@ -10,8 +10,8 @@ import {
   FilterItemLabel,
 } from './Filters.styled';
 
-const MAX_FILTER_PREVIEW_WIDTH = 60;
-const MAX_FILTER_PREVIEW_HEIGHT = 45;
+const MAX_FILTER_PREVIEW_WIDTH = 71;
+const MAX_FILTER_PREVIEW_HEIGHT = 100;
 
 const FilterItem = ({
   filterLabel,

@@ -46,4 +46,19 @@ const StyledRotationSlider = styled(RotationSlider)`
 
 const StyledRotateButton = styled(IconButton)``;
 
-export { StyledRotationOptions, StyledRotationSlider, StyledRotateButton };
+const StyledRotateButtonContainer = styled.div`
+  background-color: white;
+  display: flex;
+  border-radius: 8px;
+  margin-top: 8px;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px;
+`;
+
+export {
+  StyledRotationOptions,
+  StyledRotationSlider,
+  StyledRotateButton,
+  StyledRotateButtonContainer,
+};

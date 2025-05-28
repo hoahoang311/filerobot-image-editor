@@ -19,7 +19,7 @@ const DEFAULT_VALUE = {
   brightness: 0,
 };
 const MAX_VALUE = 1;
-const sliderStyle = { width: 150, padding: 0, margin: 0 };
+const sliderStyle = { width: '100%', padding: 0, margin: 0 };
 
 const BrightnessOptions = ({ t }) => {
   const [finetuneProps, setFinetuneProps] = useFinetune(
@@ -44,7 +44,6 @@ const BrightnessOptions = ({ t }) => {
           min={MIN_VALUE}
           step={0.05}
           max={MAX_VALUE}
-          width="124px"
           value={finetuneProps.brightness ?? DEFAULT_VALUE.brightness}
           onChange={changeValue}
           style={sliderStyle}

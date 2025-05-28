@@ -5,9 +5,11 @@ import PropTypes from 'prop-types';
 /** Internal Dependencies */
 import { useStore } from 'hooks';
 import { TOOLS_IDS, WATERMARK_ANNOTATION_ID } from 'utils/constants';
-import Carousel from 'components/common/Carousel';
 import { SET_FEEDBACK } from 'actions';
-import { StyledWatermarkGalleryItem } from './Watermark.styled';
+import {
+  StyledWatermarkGalleryItem,
+  StyledWatermarkList,
+} from './Watermark.styled';
 
 const WatermarksGallery = ({
   addImgWatermark,
@@ -48,7 +50,7 @@ const WatermarksGallery = ({
   }
 
   return (
-    <Carousel className="FIE_watermark-gallery" style={style}>
+    <StyledWatermarkList className="FIE_watermark-gallery" style={style}>
       {gallery.map((watermark) => {
         const watermarkUrl = watermark?.url || watermark;
         const previewUrl = watermark?.previewUrl || watermarkUrl;
@@ -74,7 +76,7 @@ const WatermarksGallery = ({
           </StyledWatermarkGalleryItem>
         );
       })}
-    </Carousel>
+    </StyledWatermarkList>
   );
 };
 

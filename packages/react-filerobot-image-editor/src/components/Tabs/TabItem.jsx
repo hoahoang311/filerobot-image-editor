@@ -18,7 +18,7 @@ const TabItem = ({ id, label, Icon, isSelected, onClick }) => {
       aria-selected={isSelected}
       onClick={handleClick}
     >
-      <Icon size={24} />
+      <Icon size={16} color={isSelected ? '#186de2' : '#888888'} />
       {label && (
         <StyledTabItemLabel className="FIE_tab-label">
           {label}

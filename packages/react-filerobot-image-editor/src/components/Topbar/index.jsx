@@ -32,9 +32,9 @@ const Topbar = ({ toggleMainMenu }) => {
     <StyledTopbar className="FIE_topbar" isPhoneScreen={isPhoneScreen}>
       <StyledControlButtonsWrapper>
         <StyledHistoryButtons className="FIE_topbar-history-buttons">
-          <ResetButton margin="0" showBackButton={showBackButton} />
           <UndoButton margin="0" showBackButton={showBackButton} />
           <RedoButton margin="0" showBackButton={showBackButton} />
+          <ResetButton margin="0" showBackButton={showBackButton} />
         </StyledHistoryButtons>
 
         {showBackButton ? <SaveButton /> : <CloseButton />}

@@ -7,8 +7,9 @@ import { FontVariant as FV } from '@scaleflex/ui/utils/types/typography';
 const StyledToolsBar = styled.div`
   width: fit-content;
   margin: 0 auto;
-  max-width: 99.5%;
-  max-height: 170px;
+  padding-top: 16px;
+  max-width: 256px;
+  max-height: 520px;
 
   [data-phone='true'] & {
     padding: 0;
@@ -18,11 +19,13 @@ const StyledToolsBar = styled.div`
 `;
 
 const StyledToolsBarItems = styled.div`
-  padding: 8px 16px 16px 16px;
-  display: flex;
-  gap: 12px;
+  background-color: white;
+  width: 256px;
+  padding: 16px;
+  border-radius: 8px;
   align-items: center;
-  overflow: hidden;
+  overflow: auto;
+  scrollbar-width: none;
 
   ${({ isPhoneScreen }) =>
     isPhoneScreen &&
@@ -37,9 +40,10 @@ const StyledToolsBarItemButton = styled.div(
   ({ theme, isPhoneScreen }) => `
     display: flex;
     gap: 6px;
+    margin-top: 8px;
     border-radius: 2px;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     padding: 8px 12px;
 
     svg {
@@ -95,8 +99,8 @@ const StyledToolsBarItemOptionsWrapper = styled.div`
   gap: 24px;
 
   ${(props) => `
-      max-height: ${props.hasChildren ? '56px' : 0};
-      margin: ${props.hasChildren ? '0 auto 8px' : 0};
+      // max-height: ${props.hasChildren ? '56px' : 0};
+      // margin: ${props.hasChildren ? '0 auto 8px' : 0};
     `};
 
   ${({ isPhoneScreen }) =>
@@ -110,10 +114,19 @@ const StyledToolsBarItemOptionsWrapper = styled.div`
   `}
 `;
 
+const StyledToolItemWrapper = styled.div`
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  gap: 12px;
+`;
+
 export {
   StyledToolsBar,
   StyledToolsBarItems,
   StyledToolsBarItemButton,
   StyledToolsBarItemButtonLabel,
   StyledToolsBarItemOptionsWrapper,
+  StyledToolItemWrapper,
 };

@@ -273,6 +273,15 @@ const Watermark = () => {
         </StyledControlsWrapper>
       )}
       <StyledWatermarkWrapper className="FIE_watermark-add-wrapper" noWrap>
+        <WatermarksGallery
+          loadAndSetWatermarkImg={loadAndSetWatermarkImg}
+          addImgWatermark={addImgWatermark}
+          style={
+            isPhoneScreen && Boolean(watermark?.name)
+              ? { width: '55%' }
+              : undefined
+          }
+        />
         <ButtonWithMenu
           className="FIE_watermark-add"
           color="secondary"
@@ -282,15 +291,6 @@ const Watermark = () => {
           menuItems={menuItems}
           menuFromBtn
           noMargin
-        />
-        <WatermarksGallery
-          loadAndSetWatermarkImg={loadAndSetWatermarkImg}
-          addImgWatermark={addImgWatermark}
-          style={
-            isPhoneScreen && Boolean(watermark?.name)
-              ? { width: '55%' }
-              : undefined
-          }
         />
         <HiddenUploadInput
           onChange={isLoading ? undefined : importWatermarkImg}

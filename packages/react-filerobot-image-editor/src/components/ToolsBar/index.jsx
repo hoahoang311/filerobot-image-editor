@@ -7,8 +7,11 @@ import { SELECT_TOOL } from 'actions';
 import { TABS_TOOLS, TOOLS_ITEMS } from 'components/tools/tools.constants';
 import { TABS_IDS } from 'utils/constants';
 import { useStore } from 'hooks';
-import Carousel from 'components/common/Carousel';
-import { StyledToolsBar, StyledToolsBarItems } from './ToolsBar.styled';
+import {
+  StyledToolItemWrapper,
+  StyledToolsBar,
+  StyledToolsBarItems,
+} from './ToolsBar.styled';
 import ToolsBarItemOptionsWrapper from './ToolsBarItemOptionsWrapper';
 
 const style = { maxWidth: '100%', width: '100%' };
@@ -98,23 +101,23 @@ const ToolsBar = ({ isPhoneScreen }) => {
 
   return (
     <StyledToolsBar className="FIE_tools-bar-wrapper">
-      <ToolsBarItemOptionsWrapper isPhoneScreen={isPhoneScreen}>
-        {ToolOptionsComponent && <ToolOptionsComponent t={t} />}
-      </ToolsBarItemOptionsWrapper>
       {items && (
         <StyledToolsBarItems
           className="FIE_tools-bar"
           isPhoneScreen={isPhoneScreen}
         >
           {currentTabId !== TABS_IDS.WATERMARK ? (
-            <Carousel className="FIE_tools" style={style}>
+            <StyledToolItemWrapper className="FIE_tools" style={style}>
               {items}
-            </Carousel>
+            </StyledToolItemWrapper>
           ) : (
             items
           )}
         </StyledToolsBarItems>
       )}
+      <ToolsBarItemOptionsWrapper isPhoneScreen={isPhoneScreen}>
+        {ToolOptionsComponent && <ToolOptionsComponent t={t} />}
+      </ToolsBarItemOptionsWrapper>
     </StyledToolsBar>
   );
 };

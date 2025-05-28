@@ -1,7 +1,7 @@
 /** External Dependencies */
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import Redo from '@scaleflex/icons/redo';
+import { RedoIcon } from 'components/Icons';
 
 /** Internal Dependencies */
 import { REDO } from 'actions';
@@ -24,7 +24,7 @@ const RedoButton = ({ margin }) => {
       title={t('redoTitle')}
       margin={margin}
     >
-      <Redo />
+      <RedoIcon /> Redo
     </StyledHistoryButton>
   );
 };

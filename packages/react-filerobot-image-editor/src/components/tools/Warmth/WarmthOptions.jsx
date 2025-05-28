@@ -19,7 +19,7 @@ const DEFAULT_VALUE = {
   warmth: MIN_VALUE,
 };
 const MAX_VALUE = 200;
-const sliderStyle = { width: 150, padding: 0, margin: 0 };
+const sliderStyle = { width: '100%', padding: 0, margin: 0 };
 
 const WarmthOptions = ({ t }) => {
   const [finetuneProps, setFinetuneProps] = useFinetune(
@@ -43,7 +43,6 @@ const WarmthOptions = ({ t }) => {
           className="FIE_warmth-option"
           min={MIN_VALUE}
           max={MAX_VALUE}
-          width="124px"
           value={finetuneProps.warmth ?? DEFAULT_VALUE.warmth}
           onChange={changeValue}
           style={sliderStyle}
