@@ -16,6 +16,7 @@ import {
   StyledFontFamilySelect,
   StyledFontSizeInput,
   StyledToolsWrapper,
+  StyledFontWrapper,
 } from './TextOptions.styled';
 import {
   textOptionsPopupComponents,
@@ -127,37 +128,38 @@ const TextControls = ({ text, saveText, children }) => {
       }
       t={t}
     >
-      {Array.isArray(fonts) && fonts.length > 1 && (
-        <StyledFontFamilySelect
-          className="FIE_text-font-family-option"
-          onChange={changeFontFamily}
-          value={text.fontFamily}
-          placeholder={t('fontFamily')}
+      <StyledFontWrapper>
+        {Array.isArray(fonts) && fonts.length > 1 && (
+          <StyledFontFamilySelect
+            className="FIE_text-font-family-option"
+            onChange={changeFontFamily}
+            value={text.fontFamily}
+            placeholder={t('fontFamily')}
+            size="sm"
+          >
+            {/* fontFamily is string or object */}
+            {fonts.map((fontFamily = '') => (
+              <MenuItem
+                className="FIE_text-font-family-item"
+                key={fontFamily.value ?? fontFamily}
+                value={fontFamily.value ?? fontFamily}
+              >
+                {fontFamily.label ?? fontFamily}
+              </MenuItem>
+            ))}
+          </StyledFontFamilySelect>
+        )}
+        <StyledFontSizeInput
+          className="FIE_text-size-option"
+          value={text.fontSize || ''}
+          name="fontSize"
+          onChange={changeTextProps}
+          inputMode="numeric"
+          type="number"
           size="sm"
-        >
-          {/* fontFamily is string or object */}
-          {fonts.map((fontFamily = '') => (
-            <MenuItem
-              className="FIE_text-font-family-item"
-              key={fontFamily.value ?? fontFamily}
-              value={fontFamily.value ?? fontFamily}
-            >
-              {fontFamily.label ?? fontFamily}
-            </MenuItem>
-          ))}
-        </StyledFontFamilySelect>
-      )}
-      <StyledFontSizeInput
-        className="FIE_text-size-option"
-        value={text.fontSize || ''}
-        name="fontSize"
-        onChange={changeTextProps}
-        inputMode="numeric"
-        type="number"
-        size="sm"
-        placeholder={t('size')}
-      />
-
+          placeholder={t('size')}
+        />
+      </StyledFontWrapper>
       <StyledToolsWrapper>
         {!useCloudimage && (
           <>

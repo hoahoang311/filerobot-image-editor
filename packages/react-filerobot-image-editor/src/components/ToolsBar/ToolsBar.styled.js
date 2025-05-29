@@ -40,7 +40,7 @@ const StyledToolsBarItemButton = styled.div(
   ({ theme, isPhoneScreen }) => `
     display: flex;
     gap: 6px;
-    margin-top: 8px;
+    // margin-top: 8px;
     border-radius: 2px;
     align-items: flex-start;
     justify-content: flex-start;

@@ -7,6 +7,7 @@ const StyledOptions = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
   padding: 16px;
   margin-top: 8px;
   border-radius: 8px;

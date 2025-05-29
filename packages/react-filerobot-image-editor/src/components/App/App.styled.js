@@ -30,6 +30,12 @@ const StyledAppWrapper = styled.div.attrs(({ $size = {} }) => ({
 const StyledMainContent = styled.div`
   display: flex;
   align-items: flex-start;
+  background-color: white;
+  padding-inline: 16px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-bottom: 16px;
+  box-shadow: 6px 8px 12px 0px rgba(146, 166, 188, 0.14);
   width: 100%;
   box-sizing: border-box;
   height: calc(100% - 95px); // 95px = possible max height of topbar w/ spaces
@@ -44,6 +50,7 @@ const StyledCanvasAndTools = styled.div`
   height: 100%;
   width: calc(100% - 80px); // 80px = tabsbar's width.
   flex-grow: 1;
+  border-radius: 6px;
   display: flex;
   position: relative;
   background-color: #f5f5f5;
