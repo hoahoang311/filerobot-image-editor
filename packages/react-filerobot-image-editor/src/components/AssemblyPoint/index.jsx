@@ -12,7 +12,7 @@ import assignFinetuneNamesToKonva from 'utils/assignFinetuneNamesToKonva';
 import { FontsFaces, OverrideDefaultStyles } from './globalStyles';
 
 const AssemblyPoint = (props) => {
-  const { source, useCloudimage, cloudimage } = props;
+  const { source, useCloudimage, cloudimage, actionComponents } = props;
   if (
     !source ||
     (typeof source !== 'string' && !(source instanceof HTMLImageElement))
@@ -41,7 +41,7 @@ const AssemblyPoint = (props) => {
         <FontsFaces />
         <OverrideDefaultStyles />
         <AppProvider config={defaultAndProvidedConfigMerged}>
-          <App />
+          <App>{actionComponents}</App>
         </AppProvider>
       </ThemeProvider>
     </React.StrictMode>

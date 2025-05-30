@@ -15,6 +15,7 @@ const StyledMainButton = styled(Button)`
   flex-grow: 1;
   justify-content: center;
   align-items: center;
+  background-color: #186de2;
 `;
 
 const StyledMenu = styled(Menu)`

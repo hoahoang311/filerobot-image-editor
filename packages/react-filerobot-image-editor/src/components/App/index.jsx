@@ -41,7 +41,7 @@ import {
   StyledInfo,
 } from './App.styled';
 
-const App = () => {
+const App = ({ children }) => {
   const {
     config,
     isLoadingGlobally,
@@ -326,7 +326,7 @@ const App = () => {
       {!showCanvasOnly && (
         <>
           {showTabsDrawer && <TabsDrawer toggleMainMenu={toggleMainMenu} />}
-          <Topbar toggleMainMenu={toggleMainMenu} />
+          <Topbar toggleMainMenu={toggleMainMenu}>{children}</Topbar>
         </>
       )}
       {originalImage && feedback.duration !== 0 && (

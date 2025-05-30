@@ -57,6 +57,8 @@ const StyledZoomingWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 2px;
+  background-color: white;
+  border-radius: 6px;
 `;
 
 const StyledDimensionsLabel = styled(Label)`
@@ -77,14 +79,17 @@ const StyledSmallButton = styled(IconButton)`
 const StyledFlexCenterAlignedContainer = styled.div`
   width: ${({ showBackButton }) => (showBackButton ? '318px' : '384px')};
   height: 32px;
-  display: block;
+  display: fixed;
   width: 100%;
   order: 4;
   ${({ reverseDirection }) =>
     reverseDirection ? 'flex-direction: row-reverse' : ''};
 
   @media (min-width: 761px) {
-    display: flex;
+    position: fixed;
+    bottom: 20px;
+    z-index: 99;
+    margin-left: 20px;
     align-items: center;
     justify-content: center;
     width: fit-content;

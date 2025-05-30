@@ -21,7 +21,7 @@ import {
 } from './Topbar.styled';
 import BackButton from './BackButton';
 
-const Topbar = ({ toggleMainMenu }) => {
+const Topbar = ({ toggleMainMenu, children }) => {
   const {
     config: { showBackButton },
   } = useStore();
@@ -48,7 +48,10 @@ const Topbar = ({ toggleMainMenu }) => {
         >
           {(props) => <Menu {...props} />}
         </StyledMenuIconButton>
-        {showBackButton ? <BackButton /> : <SaveButton />}
+        <div>
+          {children}
+          {showBackButton ? <BackButton /> : <SaveButton />}
+        </div>
       </StyledMainButtonsWrapper>
 
       <StyledFlexCenterAlignedContainer

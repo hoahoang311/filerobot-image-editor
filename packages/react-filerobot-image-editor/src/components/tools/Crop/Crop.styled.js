@@ -75,6 +75,69 @@ const StyledAccordion = styled(Accordion)(
   `,
 );
 
+const StyledCropItems = styled.div`
+  position: absolute;
+  right: 88px;
+  top: 135px;
+  width: 256px;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: white;
+
+  > div {
+    min-width: 100%;
+
+    * {
+      color: black !important;
+    }
+  }
+`;
+
+const StyledCustomCropItems = styled.div`
+  position: absolute;
+  right: 88px;
+  top: 389px;
+  width: 256px;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: white;
+  display: flex;
+
+  > div {
+    * {
+      color: black !important;
+    }
+  }
+
+  gap: 8px;
+
+  div:nth-child(1) {
+    min-width: 60px;
+  }
+
+  div:nth-child(2) {
+    min-width: 60px;
+  }
+
+  label {
+    font-size: 10px;
+  }
+`;
+
+const StyledApplyButton = styled(Button)`
+  height: 24px;
+  align-self: flex-end;
+  background-color: #186de2;
+
+  span {
+    * {
+      color: white !important;
+      font-weight: 400 !important;
+      font-size: 10px !important;
+    }
+  }
+`;
+
 export {
   StyledToolsBarItemButtonWrapper,
   StyledOpenMenuButton,
@@ -84,4 +147,7 @@ export {
   StyledMenuItem,
   StyledMenuItemLabel,
   StyledAccordion,
+  StyledCropItems,
+  StyledCustomCropItems,
+  StyledApplyButton,
 };

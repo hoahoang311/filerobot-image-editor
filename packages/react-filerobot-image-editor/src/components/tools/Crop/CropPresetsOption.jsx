@@ -1,5 +1,5 @@
 /** External Dependencies */
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 
 /** Internal Dependencies */
@@ -10,7 +10,6 @@ import { DEFAULT_ZOOM_FACTOR, ORIGINAL_CROP, TOOLS_IDS } from 'utils/constants';
 import toPrecisedFloat from 'utils/toPrecisedFloat';
 import getZoomFitFactor from 'utils/getZoomFitFactor';
 import { MoveDownOutline, MoveUpOutline } from '@scaleflex/icons';
-import { Menu } from '@scaleflex/ui/core';
 import { DEFAULT_CROP_PRESETS } from './Crop.constants';
 import CropPresetGroupsList from './CropPresetGroupsFolder';
 import CropPresetItem from './CropPresetItem';
@@ -18,7 +17,11 @@ import {
   StyledOpenMenuButton,
   StyledMenu,
   StyledToolsBarItemButtonWrapper,
+  StyledCropItems,
+  StyledCustomCropItems,
+  StyledApplyButton,
 } from './Crop.styled';
+import { StyledResizeInput } from '../Resize/Resize.styled';
 
 const CropPresetsOption = ({ anchorEl, onClose }) => {
   const {
@@ -34,17 +37,17 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
   const currentRatio = appliedRatio || ORIGINAL_CROP; // we consider original as default one if no ratio has been set.
   const cropConfig = config[TOOLS_IDS.CROP];
   const isPhoneScreen = usePhoneScreen();
-
+  const [customCrop, setCustomCrop] = useState({ w: null, h: null });
   const allPresets = useMemo(() => {
     const {
-      presetsItems = [],
-      presetsFolders = [],
+      // presetsItems = [],
+      // presetsFolders = [],
       lockCropAreaAt,
     } = cropConfig;
     const defaultPresets = lockCropAreaAt
       ? DEFAULT_CROP_PRESETS.filter((item) => !item.hide?.({ lockCropAreaAt }))
       : DEFAULT_CROP_PRESETS;
-    return [...presetsFolders, ...defaultPresets, ...presetsItems];
+    return [...defaultPresets];
   }, [cropConfig]);
 
   const changeCropRatio = (e, newCropRatio, cropProps) => {
@@ -83,6 +86,31 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
         },
       });
     }
+    onClose();
+  };
+
+  const handleChangeCustomCrop = (e) => {
+    const { name, value } = e.target;
+    if (name === 'width') {
+      setCustomCrop((state) => ({ ...state, w: value }));
+    } else {
+      setCustomCrop((state) => ({ ...state, h: value }));
+    }
+  };
+
+  const handleApplyCustomCrop = (e) => {
+    e.stopPropagation();
+    dispatch({
+      type: SET_CROP,
+      payload: {
+        ratio: toPrecisedFloat(customCrop.w / customCrop.h),
+        ratioTitleKey: `Portrait (${customCrop.w}x${customCrop.h})`,
+        ratioGroupKey: undefined,
+        ratioFolderKey: undefined,
+        noEffect: false,
+      },
+    });
+
     onClose();
   };
 
@@ -152,8 +180,50 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
           )}
         </StyledOpenMenuButton>
       </StyledToolsBarItemButtonWrapper>
+      {anchorEl && (
+        <StyledCropItems className="FIE_crop-items">
+          <StyledMenu>{allPresets.map(renderPreset)}</StyledMenu>
+        </StyledCropItems>
+      )}
+      {anchorEl && (
+        <StyledCustomCropItems className="FIE_crop-items">
+          <StyledResizeInput
+            className="FIE_custom-crop"
+            value={customCrop.w}
+            name="width"
+            onChange={handleChangeCustomCrop}
+            inputMode="numeric"
+            title="W"
+            label="W"
+            inputProps={{ type: 'number' }}
+            size="sm"
+            iconEnd=""
+            placeholder="Width"
+          />
+          <StyledResizeInput
+            className="FIE_custom-crop"
+            value={customCrop.h}
+            name="height"
+            onChange={handleChangeCustomCrop}
+            inputMode="numeric"
+            title="H"
+            label="H"
+            inputProps={{ type: 'number' }}
+            size="sm"
+            iconEnd=""
+            placeholder="Height"
+          />
+          <StyledApplyButton
+            size="sm"
+            disabled={customCrop.w <= 0 || customCrop.h <= 0}
+            onClick={handleApplyCustomCrop}
+          >
+            Apply
+          </StyledApplyButton>
+        </StyledCustomCropItems>
+      )}
 
-      <Menu
+      {/* <Menu
         className="FIE_crop-presets-menu"
         anchorEl={anchorEl}
         enableOverlay
@@ -172,8 +242,7 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
         }}
         maxHeight="100%"
       >
-        <StyledMenu>{allPresets.map(renderPreset)}</StyledMenu>
-      </Menu>
+      </Menu> */}
     </>
   );
 };

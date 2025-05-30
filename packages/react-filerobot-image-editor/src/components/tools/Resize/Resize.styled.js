@@ -4,6 +4,7 @@ import IconButton from '@scaleflex/ui/core/icon-button';
 import InputGroup from '@scaleflex/ui/core/input-group';
 import { Color as PC } from '@scaleflex/ui/utils/types/palette';
 import { FontVariant as FV } from '@scaleflex/ui/utils/types/typography';
+import { Button } from '@scaleflex/ui/core';
 
 const StyledResizeWrapper = styled.div`
   display: flex;
@@ -25,7 +26,10 @@ const StyledResizeInput = styled(InputGroup)(
     width: 79px;
     border: none;
     background-color: #f1f1f1;
-    padding: 4px 6px;
+    height: 24px;
+    padding-block: 0;
+    padding-inline: 8px;
+    border-radius: 6px;
 
     .SfxInput-Base {
       width: 100%;
