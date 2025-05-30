@@ -87,7 +87,7 @@ const StyledFlexCenterAlignedContainer = styled.div`
 
   @media (min-width: 761px) {
     position: fixed;
-    bottom: 20px;
+    bottom: 36px;
     z-index: 99;
     margin-left: 20px;
     align-items: center;

@@ -16,6 +16,11 @@ const StyledMainButton = styled(Button)`
   justify-content: center;
   align-items: center;
   background-color: #186de2;
+  color: white;
+
+  span * {
+    font-weight: 300 !important;
+  }
 `;
 
 const StyledMenu = styled(Menu)`

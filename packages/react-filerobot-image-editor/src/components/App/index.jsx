@@ -89,6 +89,7 @@ const App = ({ children }) => {
   const transformImgFn = useTransformedImgData();
   const [faceBox, setFaceBox] = useState(null);
   const [topToChin, setTopToChin] = useState(0);
+  const [topMargin, setTopMargin] = useState(0);
 
   const setNewOriginalImage = useCallback((newOriginalImage) => {
     dispatch({
@@ -292,6 +293,10 @@ const App = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    dispatch({ type: RESET, payload: { config } });
+  }, [originalImage]);
+
+  useEffect(() => {
     if (updateStateFnRef && typeof updateStateFnRef === 'object') {
       updateStateFnRef.current = (newStatePartObjOrFn) => {
         dispatch({
@@ -321,6 +326,8 @@ const App = ({ children }) => {
     });
   };
 
+  console.log(topMargin);
+
   const renderContent = () => (
     <>
       {!showCanvasOnly && (
@@ -337,11 +344,7 @@ const App = ({ children }) => {
           >
             {faceBox && cropConfig.showImageFrames && (
               <StyledInfo>
-                <p>
-                  {`Face height: ${Math.floor(
-                    faceBox.height * 0.2645833333,
-                  )}mm`}
-                </p>
+                <p>{`Top margin: ${Math.floor(topMargin * 0.2645833333)}mm`}</p>
                 {topToChin && (
                   <p>
                     {`Top to chin: ${Math.floor(topToChin * 0.2645833333)}mm`}
@@ -353,10 +356,15 @@ const App = ({ children }) => {
               setFaceBox={setFaceBox}
               faceBox={faceBox}
               setTopToChin={setTopToChin}
+              topToChin={topToChin}
+              topMargin={topMargin}
+              setTopMargin={setTopMargin}
             />
             <StyledToolsWrapper className="FIE_tool_wrapper">
-              {!showCanvasOnly && <ToolsBar isPhoneScreen={isPhoneScreen} />}
-              {!showCanvasOnly && !showTabsDrawer && (
+              {originalImage && !showCanvasOnly && (
+                <ToolsBar isPhoneScreen={isPhoneScreen} />
+              )}
+              {originalImage && !showCanvasOnly && !showTabsDrawer && (
                 <StyledTabs className="FIE_tabs">
                   <Tabs toggleMainMenu={toggleMainMenu} />
                 </StyledTabs>

@@ -51,6 +51,7 @@ const AssemblyPoint = (props) => {
 AssemblyPoint.defaultProps = {
   useCloudimage: false,
   cloudimage: {},
+  actionComponents: null,
 };
 
 AssemblyPoint.propTypes = {
@@ -62,6 +63,7 @@ AssemblyPoint.propTypes = {
   ]).isRequired,
   useCloudimage: PropTypes.bool,
   cloudimage: PropTypes.instanceOf(Object),
+  actionComponents: PropTypes.node,
 };
 
 export default memo(AssemblyPoint);

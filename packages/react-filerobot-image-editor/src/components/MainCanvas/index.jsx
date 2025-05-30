@@ -11,7 +11,14 @@ import NodeControls from 'components/NodeControls';
 import CanvasNode from './CanvasNode';
 import { CanvasContainer, StyledOrignalImage } from './MainCanvas.styled';
 
-const MainCanvas = ({ setFaceBox, faceBox, setTopToChin }) => {
+const MainCanvas = ({
+  setFaceBox,
+  faceBox,
+  setTopToChin,
+  topToChin,
+  topMargin,
+  setTopMargin,
+}) => {
   const [observeResize] = useResizeObserver();
   const providedAppContext = useStore();
   const canvasContainerRef = useRef(null);
@@ -49,6 +56,9 @@ const MainCanvas = ({ setFaceBox, faceBox, setTopToChin }) => {
             setFaceBox={setFaceBox}
             faceBox={faceBox}
             setTopToChin={setTopToChin}
+            topToChin={topToChin}
+            setTopMargin={setTopMargin}
+            topMargin={topMargin}
           />
         </AppProviderOverridenValue>
       </CanvasNode>
@@ -60,6 +70,9 @@ MainCanvas.propTypes = {
   setFaceBox: PropTypes.func.isRequired,
   faceBox: PropTypes.shape({}),
   setTopToChin: PropTypes.func.isRequired,
+  topToChin: PropTypes.number.isRequired,
+  setTopMargin: PropTypes.func.isRequired,
+  topMargin: PropTypes.number.isRequired,
 };
 
 MainCanvas.defaultProps = {

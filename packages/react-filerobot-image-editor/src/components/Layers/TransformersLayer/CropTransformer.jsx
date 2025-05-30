@@ -1,5 +1,5 @@
 /** External Dependencies */
-import React, { useEffect, useRef, useMemo } from 'react';
+import React, { useEffect, useRef, useMemo, useState } from 'react';
 import { Ellipse, Image, Line, Rect, Transformer } from 'react-konva';
 import Konva from 'konva';
 import * as faceapi from 'face-api.js';
@@ -23,7 +23,13 @@ const noEffectTextDimensions = {
   height: 100,
 };
 
-const CropTransformer = ({ setFaceBox, faceBox, setTopToChin }) => {
+const CropTransformer = ({
+  setFaceBox,
+  faceBox,
+  setTopToChin,
+  topToChin,
+  setTopMargin,
+}) => {
   const {
     dispatch,
     theme,
@@ -51,6 +57,7 @@ const CropTransformer = ({ setFaceBox, faceBox, setTopToChin }) => {
   const cropRatio = crop.ratio || cropSettings.ratio;
   const isCustom = cropRatio === CUSTOM_CROP;
   const isEllipse = cropRatio === ELLIPSE_CROP;
+  const [topHead, setTopHead] = useState(0);
 
   const getProperCropRatio = () =>
     cropRatio === ORIGINAL_CROP
@@ -238,6 +245,7 @@ const CropTransformer = ({ setFaceBox, faceBox, setTopToChin }) => {
         const isWhite = r > 200 && g > 200 && b > 200;
 
         if (!isWhite && y > 5 && x > 5 && x < originalImage.width - 5) {
+          setTopHead(y * scaledMeasures.scaleY);
           setTopToChin(faceBox.height + faceBox.y - y * scaledMeasures.scaleY);
           return;
         }
@@ -271,6 +279,12 @@ const CropTransformer = ({ setFaceBox, faceBox, setTopToChin }) => {
     );
   };
 
+  useEffect(() => {
+    if (cropTransformerRef.current) {
+      cropTransformerRef.current.moveToTop();
+    }
+  }, [faceBox]);
+
   const limitDragging = (e) => {
     const currentCropShape = e.target;
     currentCropShape.setAttrs(
@@ -299,6 +313,7 @@ const CropTransformer = ({ setFaceBox, faceBox, setTopToChin }) => {
   }
 
   const { x = 0, y = 0, width, height } = attrs;
+
   const cropShapeProps = {
     x,
     y,
@@ -312,6 +327,12 @@ const CropTransformer = ({ setFaceBox, faceBox, setTopToChin }) => {
     onTransformEnd: lockCropAreaAt ? undefined : saveCropFromEvent,
     draggable: !lockCropAreaAt,
   };
+
+  useEffect(() => {
+    if (topHead) {
+      setTopMargin(topHead - cropShapeProps.y);
+    }
+  }, [topHead, cropShapeProps]);
 
   // ALT is used to center scaling
   return (
@@ -346,6 +367,7 @@ const CropTransformer = ({ setFaceBox, faceBox, setTopToChin }) => {
             width={crop.noEffect ? 0 : width}
             height={crop.noEffect ? 0 : height}
           />
+
           {cropSettings.showImageFrames && (
             <Line
               points={[
@@ -358,12 +380,23 @@ const CropTransformer = ({ setFaceBox, faceBox, setTopToChin }) => {
               strokeWidth={1}
             />
           )}
+
           {cropSettings.showImageFrames && faceBox && (
-            <Rect
-              x={faceBox.x}
-              y={faceBox.y}
-              width={faceBox.width}
-              height={faceBox.height}
+            <Ellipse
+              x={faceBox.x + faceBox.width / 2}
+              y={topHead + topToChin / 2}
+              radiusX={faceBox.width / 2}
+              radiusY={topToChin / 2}
+              stroke="red"
+              strokeWidth={1}
+            />
+          )}
+          {cropSettings.showImageFrames && faceBox && (
+            <Ellipse
+              x={faceBox.x + faceBox.width / 2}
+              y={faceBox.y + faceBox.height / 2}
+              radiusX={faceBox.width / 2 - 10}
+              radiusY={faceBox.height / 2}
               stroke="red"
               strokeWidth={1}
             />
@@ -432,6 +465,7 @@ CropTransformer.propTypes = {
     src: PropTypes.string,
   }),
   setTopToChin: PropTypes.func.isRequired,
+  topToChin: PropTypes.number.isRequired,
 };
 
 CropTransformer.defaultProps = {

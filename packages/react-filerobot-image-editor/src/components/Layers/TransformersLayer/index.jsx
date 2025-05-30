@@ -9,7 +9,14 @@ import { TOOLS_IDS, TRANSFORMERS_LAYER_ID } from 'utils/constants';
 import CropTransformer from './CropTransformer';
 import NodesTransformer from './NodesTransformer';
 
-const TransformersLayer = ({ setFaceBox, faceBox, setTopToChin }) => {
+const TransformersLayer = ({
+  setFaceBox,
+  faceBox,
+  setTopToChin,
+  topToChin,
+  topMargin,
+  setTopMargin,
+}) => {
   const { toolId, shownImageDimensions } = useStore();
 
   return (
@@ -24,6 +31,9 @@ const TransformersLayer = ({ setFaceBox, faceBox, setTopToChin }) => {
           setFaceBox={setFaceBox}
           faceBox={faceBox}
           setTopToChin={setTopToChin}
+          topToChin={topToChin}
+          setTopMargin={setTopMargin}
+          topMargin={topMargin}
         />
       )}
     </Layer>
@@ -38,6 +48,9 @@ TransformersLayer.propTypes = {
     height: PropTypes.number,
   }).isRequired,
   setTopToChin: PropTypes.func.isRequired,
+  topToChin: PropTypes.number.isRequired,
+  setTopMargin: PropTypes.func.isRequired,
+  topMargin: PropTypes.number.isRequired,
 };
 
 export default TransformersLayer;

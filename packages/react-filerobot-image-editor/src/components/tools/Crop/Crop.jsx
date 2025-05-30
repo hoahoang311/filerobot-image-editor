@@ -20,8 +20,6 @@ const Crop = ({ selectTool, isSelected }) => {
   };
 
   const closeCropPresets = () => {
-    console.log('on close');
-
     setAnchorEl(null);
   };
 

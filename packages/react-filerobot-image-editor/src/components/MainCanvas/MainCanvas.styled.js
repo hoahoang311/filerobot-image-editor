@@ -6,9 +6,10 @@ const CanvasContainer = styled.div`
   width: 100%;
   position: relative;
   // backup for flex-grow, 94px, 12px = toolsbar's maxheight, app container padding.
-  height: calc(100% - 112px - 16px);
+  height: calc(100% - 112px - 32px);
   overflow: hidden;
   min-height: 250px;
+  align-self: anchor-center;
   padding: 16px;
   flex-grow: 1;
 `;
