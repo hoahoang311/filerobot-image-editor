@@ -18,6 +18,7 @@ import {
   StyledControlButtonsWrapper,
   StyledHistoryButtons,
   StyledMenuIconButton,
+  StyledActionButtons,
 } from './Topbar.styled';
 import BackButton from './BackButton';
 
@@ -48,10 +49,10 @@ const Topbar = ({ toggleMainMenu, children }) => {
         >
           {(props) => <Menu {...props} />}
         </StyledMenuIconButton>
-        <div>
+        <StyledActionButtons>
           {children}
           {showBackButton ? <BackButton /> : <SaveButton />}
-        </div>
+        </StyledActionButtons>
       </StyledMainButtonsWrapper>
 
       <StyledFlexCenterAlignedContainer
@@ -69,10 +70,12 @@ const Topbar = ({ toggleMainMenu, children }) => {
 
 Topbar.defaultProps = {
   toggleMainMenu: () => {},
+  children: <div />,
 };
 
 Topbar.propTypes = {
   toggleMainMenu: PropTypes.func,
+  children: PropTypes.node,
 };
 
 export default Topbar;

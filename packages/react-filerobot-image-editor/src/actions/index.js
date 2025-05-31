@@ -39,11 +39,13 @@ import updateState, { UPDATE_STATE } from './updateState';
 import setLatestColor, { SET_LATEST_COLOR } from './setLatestColor';
 import setShowTabsMenu, { SET_SHOWN_TABS_MENU } from './setShowTabsMenu';
 import setSaving, { SET_SAVING } from './setSaving';
+import showMeasure, { SHOW_MEASURE } from './showMeasure';
 
 export default {
   [SET_ORIGINAL_IMAGE]: setOriginalImage,
   [SET_FEEDBACK]: setFeedback,
   [SHOW_LOADER]: showLoader,
+  [SHOW_MEASURE]: showMeasure,
   [HIDE_LOADER]: hideLoader,
   [CHANGE_POINTER_ICON]: changePointerIcon,
   [SELECT_ANNOTATION]: selectAnnotation,
@@ -80,6 +82,7 @@ export {
   SET_ORIGINAL_IMAGE,
   SET_FEEDBACK,
   SHOW_LOADER,
+  SHOW_MEASURE,
   HIDE_LOADER,
   CHANGE_POINTER_ICON,
   SELECT_ANNOTATION,

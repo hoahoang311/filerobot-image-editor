@@ -50,6 +50,15 @@ const StyledToolsBarItemButton = styled.div(
       color: ${theme.palette[PC.IconsPrimary]};
     }
 
+
+    .FIE_crop-measurement {
+      display:flex;
+      top: 459px;
+      span {
+        color: #4D4D4D; 
+      }
+    }
+
     &,
     * {
       cursor: pointer;
@@ -79,6 +88,7 @@ const StyledToolsBarItemButton = styled.div(
         gap: 4px;
       `
     }
+
   `,
 );
 

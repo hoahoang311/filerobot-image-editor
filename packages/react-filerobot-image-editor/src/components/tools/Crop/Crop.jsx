@@ -15,8 +15,25 @@ const Crop = ({ selectTool, isSelected }) => {
   const [anchorEl, setAnchorEl] = useState();
 
   const selectToolAndShowPresets = (toolId, e) => {
-    selectTool(toolId);
-    setAnchorEl(e.currentTarget);
+    const tag = e.target.tagName;
+
+    const isCropButton =
+      (typeof e.target.className === 'string' &&
+        e.target.className.includes('FIE_crop-tool')) ||
+      tag === 'SPAN' ||
+      tag === 'svg';
+
+    if (!isCropButton) {
+      return;
+    }
+
+    if (!anchorEl) {
+      selectTool(toolId);
+      setAnchorEl(e.currentTarget);
+    } else {
+      selectTool(null);
+      setAnchorEl(null);
+    }
   };
 
   const closeCropPresets = () => {

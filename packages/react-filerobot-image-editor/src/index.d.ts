@@ -286,7 +286,6 @@ export interface FilerobotImageEditorConfig {
     maxHeight?: null;
     ratio?: 'original' | 'custom' | 'ellipse' | number;
     noPresets?: boolean;
-    showImageFrames: boolean;
     ratioTitleKey?: string;
     presetsItems?: cropPresetItem[];
     presetsFolders?: cropPresetFolder[];
@@ -369,6 +368,7 @@ export interface FilerobotImageEditorConfig {
   resetOnImageSourceChange?: boolean;
   backgroundColor?: string;
   backgroundImage?: HTMLImageElement;
+  actionComponents: React.ReactNode;
 }
 
 declare const FilerobotImageEditor: FunctionComponent<FilerobotImageEditorConfig>;

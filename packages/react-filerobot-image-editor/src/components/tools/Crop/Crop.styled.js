@@ -2,7 +2,7 @@
 import styled, { css } from 'styled-components';
 import Button from '@scaleflex/ui/core/button';
 import Label from '@scaleflex/ui/core/label';
-import { Accordion, MenuItem } from '@scaleflex/ui/core';
+import { Accordion, MenuItem, Switcher } from '@scaleflex/ui/core';
 import { Color as PC } from '@scaleflex/ui/utils/types/palette';
 import { FontVariant as FV } from '@scaleflex/ui/utils/types/typography';
 
@@ -124,6 +124,17 @@ const StyledCustomCropItems = styled.div`
   }
 `;
 
+const StyledCropMeasureContainer = styled.div`
+  position: absolute;
+  right: 88px;
+  width: 256px;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+`;
+
 const StyledApplyButton = styled(Button)`
   height: 24px;
   align-self: flex-end;
@@ -135,6 +146,19 @@ const StyledApplyButton = styled(Button)`
       font-weight: 400 !important;
       font-size: 10px !important;
     }
+  }
+`;
+
+const StyledMeasureLabel = styled.span`
+  font-size: 14px;
+`;
+
+const StyledMeasureSwitch = styled(Switcher)`
+  min-width: 28px;
+  height: 16px;
+
+  input:checked + div {
+    background-color: #186de2 !important;
   }
 `;
 
@@ -150,4 +174,7 @@ export {
   StyledCropItems,
   StyledCustomCropItems,
   StyledApplyButton,
+  StyledMeasureLabel,
+  StyledMeasureSwitch,
+  StyledCropMeasureContainer,
 };

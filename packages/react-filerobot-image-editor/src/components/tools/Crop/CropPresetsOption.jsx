@@ -3,7 +3,7 @@ import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 
 /** Internal Dependencies */
-import { SET_CROP, SET_RESIZE, ZOOM_CANVAS } from 'actions';
+import { SET_CROP, SET_RESIZE, SHOW_MEASURE, ZOOM_CANVAS } from 'actions';
 import { usePhoneScreen, useStore } from 'hooks';
 import { StyledToolsBarItemButtonLabel } from 'components/ToolsBar/ToolsBar.styled';
 import { DEFAULT_ZOOM_FACTOR, ORIGINAL_CROP, TOOLS_IDS } from 'utils/constants';
@@ -20,6 +20,9 @@ import {
   StyledCropItems,
   StyledCustomCropItems,
   StyledApplyButton,
+  StyledMeasureLabel,
+  StyledMeasureSwitch,
+  StyledCropMeasureContainer,
 } from './Crop.styled';
 import { StyledResizeInput } from '../Resize/Resize.styled';
 
@@ -31,6 +34,7 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
       crop: { ratio: appliedRatio, ratioTitleKey, ratioFolderKey } = {},
     } = {},
     shownImageDimensions,
+    showMeasure,
     config,
     theme,
   } = useStore();
@@ -159,6 +163,15 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
 
   const toolTitleKey = ratioTitleKey || 'cropTool';
 
+  const handleSwitch = () => {
+    dispatch({
+      type: SHOW_MEASURE,
+      payload: {
+        enabled: !showMeasure,
+      },
+    });
+  };
+
   return (
     <>
       <StyledToolsBarItemButtonWrapper>
@@ -223,26 +236,17 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
         </StyledCustomCropItems>
       )}
 
-      {/* <Menu
-        className="FIE_crop-presets-menu"
-        anchorEl={anchorEl}
-        enableOverlay
-        onClose={onClose}
-        open={Boolean(anchorEl)}
-        position="top"
-        popperOptions={{
-          modifiers: [
-            {
-              name: 'offset',
-              options: {
-                offset: [0, 4],
-              },
-            },
-          ],
-        }}
-        maxHeight="100%"
-      >
-      </Menu> */}
+      {anchorEl && (
+        <StyledCropMeasureContainer className="FIE_crop-measurement">
+          <StyledMeasureLabel>Show measurements</StyledMeasureLabel>
+          <StyledMeasureSwitch
+            size="sm"
+            color="#186DE2"
+            checked={showMeasure}
+            onChange={handleSwitch}
+          />
+        </StyledCropMeasureContainer>
+      )}
     </>
   );
 };

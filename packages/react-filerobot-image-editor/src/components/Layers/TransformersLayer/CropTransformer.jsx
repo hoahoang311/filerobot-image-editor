@@ -40,6 +40,8 @@ const CropTransformer = ({
     resize = {},
     config,
     t,
+    isLoadingGlobally,
+    showMeasure,
   } = useStore();
   const cropShapeRef = useRef();
   const cropTransformerRef = useRef();
@@ -368,7 +370,7 @@ const CropTransformer = ({
             height={crop.noEffect ? 0 : height}
           />
 
-          {cropSettings.showImageFrames && (
+          {showMeasure && !isLoadingGlobally && (
             <Line
               points={[
                 cropShapeProps.x + width / 2,
@@ -381,7 +383,7 @@ const CropTransformer = ({
             />
           )}
 
-          {cropSettings.showImageFrames && faceBox && (
+          {showMeasure && faceBox && !isLoadingGlobally && (
             <Ellipse
               x={faceBox.x + faceBox.width / 2}
               y={topHead + topToChin / 2}
@@ -391,7 +393,7 @@ const CropTransformer = ({
               strokeWidth={1}
             />
           )}
-          {cropSettings.showImageFrames && faceBox && (
+          {showMeasure && faceBox && !isLoadingGlobally && (
             <Ellipse
               x={faceBox.x + faceBox.width / 2}
               y={faceBox.y + faceBox.height / 2}
@@ -465,6 +467,7 @@ CropTransformer.propTypes = {
     src: PropTypes.string,
   }),
   setTopToChin: PropTypes.func.isRequired,
+  setTopMargin: PropTypes.func.isRequired,
   topToChin: PropTypes.number.isRequired,
 };
 

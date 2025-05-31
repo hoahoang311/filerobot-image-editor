@@ -160,6 +160,16 @@ const StyledDimensionsButtons = styled.div`
   align-items: center;
 `;
 
+const StyledActionButtons = styled.div`
+  display: flex;
+  gap: 4px;
+
+  .FIE_topbar-save-button {
+    height: 24px;
+    border-radius: 6px;
+  }
+`;
+
 export {
   StyledTopbar,
   StyledFlexCenterAlignedContainer,
@@ -182,4 +192,5 @@ export {
   StyledMenuIconButton,
   StyledDimensionsButtons,
   StyledResizeOnSaveLabel,
+  StyledActionButtons,
 };

@@ -293,6 +293,7 @@ const App = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    setFaceBox(null);
     dispatch({ type: RESET, payload: { config } });
   }, [originalImage]);
 
@@ -325,8 +326,6 @@ const App = ({ children }) => {
       },
     });
   };
-
-  console.log(topMargin);
 
   const renderContent = () => (
     <>
