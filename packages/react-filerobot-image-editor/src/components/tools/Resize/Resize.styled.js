@@ -21,6 +21,36 @@ const StyledResizeWrapper = styled.div`
   }
 `;
 
+const StyledCountryInput = styled(InputGroup)(
+  ({ theme }) => css`
+    width: auto;
+    border: none;
+    background-color: #f1f1f1;
+    height: 24px;
+    padding-block: 0;
+    padding-inline: 8px;
+    border-radius: 6px;
+
+    .SfxInput-Base {
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      font-size: 12px;
+      margin-left: 4px;
+    }
+
+    span {
+      color: ${theme.palette[PC.TextSecondary]};
+      ${theme.typography.font[FV.LabelMedium]};
+      font-size: 12px;
+    }
+
+    > div {
+      gap: 0;
+    }
+  `,
+);
+
 const StyledResizeInput = styled(InputGroup)(
   ({ theme }) => css`
     width: 79px;
@@ -67,4 +97,5 @@ export {
   StyledResizeInput,
   StyledRatioLockIcon,
   StyledResetButton,
+  StyledCountryInput,
 };

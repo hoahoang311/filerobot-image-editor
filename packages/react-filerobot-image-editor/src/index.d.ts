@@ -216,6 +216,19 @@ type onSaveFunction = (
   imageDesignState: imageDesignState,
 ) => void | Promise;
 
+export interface IdPhotoType {
+  id: number;
+  name: string;
+  country: string;
+  width: number;
+  height: number;
+  unit: 'MM' | 'PIXEL';
+  description?: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export type getCurrentImgDataFunction = (
   imageFileInfo: {
     name?: string;
@@ -369,6 +382,16 @@ export interface FilerobotImageEditorConfig {
   backgroundColor?: string;
   backgroundImage?: HTMLImageElement;
   actionComponents: React.ReactNode;
+  countries: Array<string>;
+  setCountry?: React.Dispatch<React.SetStateAction<string | null>>;
+  idOptions: IdPhotoType[];
+  setIdPhoto: React.Dispatch<React.SetStateAction<IdPhotoType>>;
+  setMeasurement?: React.Dispatch<
+    React.SetStateAction<{
+      topToChin: number;
+      topMargin: number;
+    }>
+  >;
 }
 
 declare const FilerobotImageEditor: FunctionComponent<FilerobotImageEditorConfig>;

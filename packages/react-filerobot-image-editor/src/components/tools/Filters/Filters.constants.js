@@ -10,30 +10,30 @@ export const AVAILABLE_FILTERS = [
     label: 'Original',
     filterFn: null,
   },
-  {
-    label: 'Invert',
-    filterFn: konvaFilters.Invert,
-  },
-  {
-    label: 'Black & White',
-    filterFn: CustomKonvaFilters.BlackAndWhite,
-  },
-  {
-    label: 'Sepia',
-    filterFn: konvaFilters.Sepia,
-  },
-  {
-    label: 'Solarize',
-    filterFn: konvaFilters.Solarize,
-  },
+  // {
+  //   label: 'Invert',
+  //   filterFn: konvaFilters.Invert,
+  // },
+  // {
+  //   label: 'Black & White',
+  //   filterFn: CustomKonvaFilters.BlackAndWhite,
+  // },
+  // {
+  //   label: 'Sepia',
+  //   filterFn: konvaFilters.Sepia,
+  // },
+  // {
+  //   label: 'Solarize',
+  //   filterFn: konvaFilters.Solarize,
+  // },
   {
     label: 'Clarendon',
     filterFn: CustomKonvaFilters.Clarendon,
   },
-  {
-    label: 'Gingham',
-    filterFn: CustomKonvaFilters.Gingham,
-  },
+  // {
+  //   label: 'Gingham',
+  //   filterFn: CustomKonvaFilters.Gingham,
+  // },
   {
     label: 'Moon',
     filterFn: CustomKonvaFilters.Moon,
@@ -62,10 +62,10 @@ export const AVAILABLE_FILTERS = [
   //   label: 'Ludwig',
   //   filterFn: CustomKonvaFilters.Ludwig,
   // },
-  {
-    label: 'Aden',
-    filterFn: CustomKonvaFilters.Aden,
-  },
+  // {
+  //   label: 'Aden',
+  //   filterFn: CustomKonvaFilters.Aden,
+  // },
   {
     label: 'Perpetua',
     filterFn: CustomKonvaFilters.Perpetua,
@@ -142,14 +142,14 @@ export const AVAILABLE_FILTERS = [
   //   label: 'Toaster',
   //   filterFn: CustomKonvaFilters.Toaster,
   // },
-  {
-    label: 'Walden',
-    filterFn: CustomKonvaFilters.Walden,
-  },
-  {
-    label: '1977',
-    filterFn: CustomKonvaFilters.NinteenSeventySeven,
-  },
+  // {
+  //   label: 'Walden',
+  //   filterFn: CustomKonvaFilters.Walden,
+  // },
+  // {
+  //   label: '1977',
+  //   filterFn: CustomKonvaFilters.NinteenSeventySeven,
+  // },
   // {
   //   label: 'Kelvin',
   //   filterFn: CustomKonvaFilters.Kelvin,

@@ -33,6 +33,7 @@ import isSameImage from 'utils/isSameImage';
 import useUpdateEffect from 'hooks/useUpdateEffect';
 import TabsDrawer from 'components/TabsDrawer';
 import { StyledToolsWrapper } from 'components/tools/Text/TextOptions/TextOptions.styled';
+import PropTypes from 'prop-types';
 import {
   StyledAppWrapper,
   StyledMainContent,
@@ -41,7 +42,7 @@ import {
   StyledInfo,
 } from './App.styled';
 
-const App = ({ children }) => {
+const App = ({ children, setMeasurement }) => {
   const {
     config,
     isLoadingGlobally,
@@ -52,6 +53,7 @@ const App = ({ children }) => {
     t,
     theme,
     feedback = {},
+    showMeasure,
   } = useStore();
   const {
     loadableDesignState,
@@ -69,7 +71,6 @@ const App = ({ children }) => {
     updateStateFnRef,
     noCrossOrigin,
     resetOnImageSourceChange,
-    Crop: cropConfig,
   } = config;
 
   const showTabsDrawer = window.matchMedia('(max-width: 760px)').matches;
@@ -327,6 +328,13 @@ const App = ({ children }) => {
     });
   };
 
+  useEffect(() => {
+    setMeasurement?.({
+      topToChin: Math.floor(topToChin * 0.2645833333),
+      topMargin: Math.floor(topMargin * 0.2645833333),
+    });
+  }, [topMargin, topToChin]);
+
   const renderContent = () => (
     <>
       {!showCanvasOnly && (
@@ -341,7 +349,7 @@ const App = ({ children }) => {
             className="FIE_editor-content"
             showTabsDrawer={showTabsDrawer}
           >
-            {faceBox && cropConfig.showImageFrames && (
+            {faceBox && showMeasure && (
               <StyledInfo>
                 <p>{`Top margin: ${Math.floor(topMargin * 0.2645833333)}mm`}</p>
                 {topToChin && (
@@ -388,6 +396,16 @@ const App = ({ children }) => {
       <FeedbackPopup />
     </StyledAppWrapper>
   );
+};
+
+App.propTypes = {
+  children: PropTypes.node,
+  setMeasurement: PropTypes.func,
+};
+
+App.defaultProps = {
+  children: null,
+  setMeasurement: undefined,
 };
 
 export default memo(App);

@@ -12,7 +12,13 @@ import assignFinetuneNamesToKonva from 'utils/assignFinetuneNamesToKonva';
 import { FontsFaces, OverrideDefaultStyles } from './globalStyles';
 
 const AssemblyPoint = (props) => {
-  const { source, useCloudimage, cloudimage, actionComponents } = props;
+  const {
+    source,
+    useCloudimage,
+    cloudimage,
+    actionComponents,
+    setMeasurement,
+  } = props;
   if (
     !source ||
     (typeof source !== 'string' && !(source instanceof HTMLImageElement))
@@ -41,7 +47,7 @@ const AssemblyPoint = (props) => {
         <FontsFaces />
         <OverrideDefaultStyles />
         <AppProvider config={defaultAndProvidedConfigMerged}>
-          <App>{actionComponents}</App>
+          <App setMeasurement={setMeasurement}>{actionComponents}</App>
         </AppProvider>
       </ThemeProvider>
     </React.StrictMode>
@@ -52,6 +58,7 @@ AssemblyPoint.defaultProps = {
   useCloudimage: false,
   cloudimage: {},
   actionComponents: null,
+  setMeasurement: undefined,
 };
 
 AssemblyPoint.propTypes = {
@@ -64,6 +71,7 @@ AssemblyPoint.propTypes = {
   useCloudimage: PropTypes.bool,
   cloudimage: PropTypes.instanceOf(Object),
   actionComponents: PropTypes.node,
+  setMeasurement: PropTypes.func,
 };
 
 export default memo(AssemblyPoint);

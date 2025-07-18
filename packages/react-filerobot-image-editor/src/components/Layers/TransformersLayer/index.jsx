@@ -46,11 +46,15 @@ TransformersLayer.propTypes = {
     y: PropTypes.number,
     width: PropTypes.number,
     height: PropTypes.number,
-  }).isRequired,
+  }),
   setTopToChin: PropTypes.func.isRequired,
   topToChin: PropTypes.number.isRequired,
   setTopMargin: PropTypes.func.isRequired,
   topMargin: PropTypes.number.isRequired,
+};
+
+TransformersLayer.defaultProps = {
+  faceBox: null,
 };
 
 export default TransformersLayer;

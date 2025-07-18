@@ -7,7 +7,9 @@ import { SET_CROP, SET_RESIZE, SHOW_MEASURE, ZOOM_CANVAS } from 'actions';
 import { usePhoneScreen, useStore } from 'hooks';
 import { StyledToolsBarItemButtonLabel } from 'components/ToolsBar/ToolsBar.styled';
 import { DEFAULT_ZOOM_FACTOR, ORIGINAL_CROP, TOOLS_IDS } from 'utils/constants';
-import toPrecisedFloat from 'utils/toPrecisedFloat';
+import toPrecisedFloat, {
+  fromIdOptionToCropPreset,
+} from 'utils/toPrecisedFloat';
 import getZoomFitFactor from 'utils/getZoomFitFactor';
 import { MoveDownOutline, MoveUpOutline } from '@scaleflex/icons';
 import { DEFAULT_CROP_PRESETS } from './Crop.constants';
@@ -23,8 +25,13 @@ import {
   StyledMeasureLabel,
   StyledMeasureSwitch,
   StyledCropMeasureContainer,
+  StyledCountrySearchWrapper,
+  StyledCountrySelectWrapper,
+  StyledMenuItem,
+  StyledCountryList,
+  StyledMenuItemLabel,
 } from './Crop.styled';
-import { StyledResizeInput } from '../Resize/Resize.styled';
+import { StyledCountryInput, StyledResizeInput } from '../Resize/Resize.styled';
 
 const CropPresetsOption = ({ anchorEl, onClose }) => {
   const {
@@ -40,8 +47,11 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
   } = useStore();
   const currentRatio = appliedRatio || ORIGINAL_CROP; // we consider original as default one if no ratio has been set.
   const cropConfig = config[TOOLS_IDS.CROP];
+  const { countries, setCountry, idOptions, setIdPhoto } = config;
   const isPhoneScreen = usePhoneScreen();
   const [customCrop, setCustomCrop] = useState({ w: null, h: null });
+  const [searchTerm, setSearchTerm] = useState();
+  const [activeCountry, setActiveCountry] = useState(null);
   const allPresets = useMemo(() => {
     const {
       // presetsItems = [],
@@ -51,8 +61,8 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
     const defaultPresets = lockCropAreaAt
       ? DEFAULT_CROP_PRESETS.filter((item) => !item.hide?.({ lockCropAreaAt }))
       : DEFAULT_CROP_PRESETS;
-    return [...defaultPresets];
-  }, [cropConfig]);
+    return [...defaultPresets, ...fromIdOptionToCropPreset(idOptions)];
+  }, [cropConfig, idOptions]);
 
   const changeCropRatio = (e, newCropRatio, cropProps) => {
     e.stopPropagation();
@@ -99,6 +109,15 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
       setCustomCrop((state) => ({ ...state, w: value }));
     } else {
       setCustomCrop((state) => ({ ...state, h: value }));
+    }
+  };
+
+  const handleEnterSearch = (e) => {
+    const { value } = e.target;
+    if (value.length) {
+      setSearchTerm(value);
+    } else {
+      setSearchTerm(undefined);
     }
   };
 
@@ -161,6 +180,31 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
       />
     );
 
+  const filteredC = useMemo(() => {
+    if (searchTerm?.length && countries?.length) {
+      return countries.filter((c) =>
+        c.toLowerCase().includes(searchTerm.toLowerCase()),
+      );
+    }
+
+    return countries;
+  }, [countries, searchTerm]);
+
+  const renderCountries = (country) => {
+    const handleClick = () => {
+      setActiveCountry(country);
+      setCountry(country);
+    };
+
+    const isActive = country === activeCountry;
+
+    return (
+      <StyledMenuItem active={isActive} onClick={handleClick} key={country}>
+        <StyledMenuItemLabel size="xl">{t(country)}</StyledMenuItemLabel>
+      </StyledMenuItem>
+    );
+  };
+
   const toolTitleKey = ratioTitleKey || 'cropTool';
 
   const handleSwitch = () => {
@@ -193,12 +237,31 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
           )}
         </StyledOpenMenuButton>
       </StyledToolsBarItemButtonWrapper>
-      {anchorEl && (
+      {anchorEl && !idOptions?.length && (
+        <StyledCountrySelectWrapper className="FIE_crop-items">
+          <StyledCountrySearchWrapper className="FIE_crop-items">
+            <StyledCountryInput
+              className="FIE_custom-crop"
+              value={searchTerm}
+              name="country"
+              onChange={handleEnterSearch}
+              size="sm"
+              placeholder="Search..."
+            />
+          </StyledCountrySearchWrapper>
+          {filteredC?.length ? (
+            <StyledCountryList className="FIE_crop-items">
+              {filteredC.map(renderCountries)}
+            </StyledCountryList>
+          ) : null}
+        </StyledCountrySelectWrapper>
+      )}
+      {anchorEl && idOptions?.length && (
         <StyledCropItems className="FIE_crop-items">
           <StyledMenu>{allPresets.map(renderPreset)}</StyledMenu>
         </StyledCropItems>
       )}
-      {anchorEl && (
+      {anchorEl && idOptions?.length && (
         <StyledCustomCropItems className="FIE_crop-items">
           <StyledResizeInput
             className="FIE_custom-crop"
@@ -236,7 +299,7 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
         </StyledCustomCropItems>
       )}
 
-      {anchorEl && (
+      {anchorEl && idOptions?.length && (
         <StyledCropMeasureContainer className="FIE_crop-measurement">
           <StyledMeasureLabel>Show measurements</StyledMeasureLabel>
           <StyledMeasureSwitch

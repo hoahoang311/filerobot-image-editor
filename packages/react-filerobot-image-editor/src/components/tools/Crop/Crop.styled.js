@@ -93,6 +93,95 @@ const StyledCropItems = styled.div`
   }
 `;
 
+const StyledCountryList = styled.div`
+  border-radius: 8px;
+  background-color: white;
+  max-height: 200px;
+  overflow: auto;
+  scrollbar-width: none;
+
+  > div {
+    * {
+      color: black !important;
+    }
+  }
+  gap: 8px;
+
+  justify-content: space-between;
+  div:nth-child(1) {
+    min-width: 60px;
+    flex: 1;
+  }
+
+  div:nth-child(2) {
+    min-width: 60px;
+  }
+
+  label {
+    font-size: 10px;
+  }
+`;
+
+const StyledCountrySearchWrapper = styled.div`
+  border-radius: 8px;
+  background-color: white;
+  display: flex;
+
+  > div {
+    * {
+      color: black !important;
+    }
+  }
+  gap: 8px;
+
+  justify-content: space-between;
+  div:nth-child(1) {
+    min-width: 60px;
+    flex: 1;
+  }
+
+  div:nth-child(2) {
+    min-width: 60px;
+  }
+
+  label {
+    font-size: 10px;
+  }
+`;
+
+const StyledCountrySelectWrapper = styled.div`
+  position: absolute;
+  right: 88px;
+  top: 132px;
+  width: 256px;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    * {
+      color: black !important;
+    }
+  }
+  gap: 8px;
+
+  justify-content: space-between;
+  div:nth-child(1) {
+    min-width: 60px;
+    flex: 1;
+  }
+
+  div:nth-child(2) {
+    min-width: 60px;
+  }
+
+  label {
+    font-size: 10px;
+  }
+`;
+
 const StyledCustomCropItems = styled.div`
   position: absolute;
   right: 88px;
@@ -177,4 +266,7 @@ export {
   StyledMeasureLabel,
   StyledMeasureSwitch,
   StyledCropMeasureContainer,
+  StyledCountrySearchWrapper,
+  StyledCountrySelectWrapper,
+  StyledCountryList,
 };
